@@ -1,0 +1,6 @@
+numpy
+scipy
+mediapy
+opencv-python
+mujoco==3.2.0
+# pin==2.7.0

@@ -1,0 +1,65 @@
+<mujocoinclude>
+
+  <body name='agv_link' pos="0.05 -0.0375 0.055">
+    <joint type="free" frictionloss="0.0001" />
+    <!-- <freejoint name='free' frictionloss="0.0001"/> -->
+    <body name="agv" euler="0 0 1.5708">
+      <geom mesh="mmk2_agv_0" material="Paint_Matte_Black__1" class="visual"/>
+      <geom mesh="mmk2_agv_1" material="Copper_Textured__1_1" class="visual"/>
+      <geom mesh="mmk2_agv_2" material="Paint_Metallic_Cool_Grey__1" class="visual"/>
+      <geom type="box" rgba="1 0 0 0" size="0.2 0.21 0.15" pos="0 0.01 0.15"/>
+    </body>
+
+    <geom name='rgt_front_wheel' pos="0.13045 -0.089989 0.005" mass='1.1566' type="sphere" size='0.06' rgba="1 1 1 0" condim='1' priority='1'/>
+    <geom name='lft_front_wheel' pos="0.13045 0.090011 0.005" mass='1.1566' type="sphere" size='0.06' rgba="1 1 1 0" condim='1' priority='1'/>
+    <geom name='rgt_behind_wheel' pos="-0.15755 -0.099989 0.005" mass='1.1566' type="sphere" size='0.06' rgba="1 1 1 0" condim='1' priority='1'/>
+    <geom name='lft_behind_wheel' pos="-0.15755 0.10001 0.005" mass='1.1566' type="sphere" size='0.06' rgba="1 1 1 0" condim='1' priority='1'/>
+
+    <geom mesh='rgt_front_wheel_link' euler="0 0 1.5708" pos="0.13045 -0.089989 0.045" rgba="0.2 0.2 0.2 1" class="visual"/>
+    <geom mesh='lft_front_wheel_link' euler="0 0 1.5708" pos="0.13045 0.090011 0.045" rgba="0.2 0.2 0.2 1" class="visual"/>
+    <geom mesh='rgt_behind_wheel_link' euler="0 0 1.5708" pos="-0.15755 -0.099989 0.045" rgba="0.2 0.2 0.2 1" class="visual"/>
+    <geom mesh='lft_behind_wheel_link' euler="0 0 1.5708" pos="-0.15755 0.10001 0.045" rgba="0.2 0.2 0.2 1" class="visual"/>
+
+    <body name='chassis' pos="0 0 -0.023" euler="0 0 1.5708">
+      <body name='skin_link' pos="1.3256e-05 0.006221 0.208">
+        <geom mesh="mmk2_lift_link_0" material="material_lift_light_color" class="visual"/>
+        <geom mesh="mmk2_lift_link_1" material="Paint_Metallic_Cool_Grey__1" class="visual"/>
+        <geom mesh="mmk2_lift_link_2" material="Paint_Matte_Black__1" class="visual"/>
+      </body>
+
+      <body name='rail_link' pos="1.3256e-05 0.039754 0.286" > 
+        <inertial pos='-0.0017204 -0.028658 0.67523' mass='3.696' fullinertia='0.34541 0.34608 0.002139 -4.3993E-06 1.0075E-10 -3.1067E-07'/>
+      </body>
+      <body name="lft_wheel_link" pos="0.13551 0.02371 0.052" quat="0.499998 0.5 -0.500002 -0.5">
+        <inertial pos="2.9309e-07 5.2077e-06 -0.029871" quat="0.28052 0.649078 -0.280681 0.649018" mass="1.1566" diaginertia="0.0035528 0.0021045 0.0021045"/>
+        <joint name="lft_wheel_joint" class='wheel'/>
+        <geom name='lft_wheel' type="mesh" rgba="0.2 0.2 0.2 1" mesh="lft_wheel_link"/>
+      </body>
+      <body name="rgt_wheel_link" pos="-0.13499 0.02371 0.052" quat="0.499998 0.5 -0.500002 -0.5">
+        <inertial pos="2.9312e-07 5.2196e-06 0.029871" quat="0.620108 0.339813 -0.620017 0.339959" mass="1.1566" diaginertia="0.0035528 0.0021045 0.0021045"/>
+        <joint name="rgt_wheel_joint" class='wheel'/>
+        <geom name='rgt_wheel' type="mesh" rgba="0.2 0.2 0.2 1" mesh="rgt_wheel_link"/>
+      </body>
+    </body>
+
+    <body name="slide_link" pos="-0.028996 1.3256e-05 1.366" euler="0 0 1.5708">
+      <joint name="slide_joint" class='slide_joint'/>
+      <body name='assembly_board_link' pos="0 -0.02825 -0.01675">
+        <geom mesh="mmk2_assembly_board_0" material="Clear_Shiny_Plastic_Black__1" class="visual"/>
+        <geom mesh="mmk2_assembly_board_1" material="Paint_Metallic_Cool_Grey__1" class="visual"/>
+      </body>
+      <body name='lft_arm_base_link' pos="0.0987032 -0.00103676 -0.0167218" quat="0.270598 -0.270598 0.653281 -0.653281">
+        <geom mesh="arm_base_0" pos="0 0 -0.0015" material="________________Emissive_White__1_2" class="arm_visual"/>
+        <geom mesh="arm_base_1" material="Paint_Matte_Black" class="arm_visual"/>
+      </body>
+      <body name='rgt_arm_base_link' pos="-0.0987032 -0.00103676 -0.0167782" quat="0.653281 0.653281 -0.270598 -0.270598">
+        <geom mesh="arm_base_0" pos="0 0 -0.0015" material="________________Emissive_White__1_2" class="arm_visual"/>
+        <geom mesh="arm_base_1" material="Paint_Matte_Black" class="arm_visual"/>
+      </body>
+      <include file="mmk2/head.xml"/>
+      <include file="mmk2/arm_left.xml"/>
+      <include file="mmk2/arm_right.xml"/>
+    </body>
+  </body>
+
+</mujocoinclude>

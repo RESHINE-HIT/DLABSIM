@@ -1,0 +1,98 @@
+<mujocoinclude>
+
+  <include file="../airbot_play/airbot_play_dependencies.xml"/>
+
+  <default>
+    <default class="visual">
+      <geom group="2" type="mesh" contype="0" conaffinity="0"/>
+    </default>
+
+    <default class='slide_joint'>
+      <joint range='0 1' type='slide' axis='0 0 -1' frictionloss="1000" damping="100" actuatorfrcrange="-1300 1000"/>
+      <position ctrlrange='0 0.8' kp='50000'/>
+    </default>
+    <default class='head_yaw_joint'>
+      <joint axis='0 0 1' range='-0.5 0.5'/>
+      <position ctrlrange='-0.5 0.5' kp='1' kv='.1'/>
+    </default>
+    <default class='head_pitch_joint'>
+      <joint axis='0 0 1' range="-0.35 1"/>
+      <position ctrlrange='-0.35 1' kp='100' kv='10'/>
+    </default>
+
+    <default class='wheel'>
+      <joint axis='0 0 -1' damping='.3' frictionloss='10'/>
+      <motor ctrlrange='-.5 .5' gear='30' forcerange='-500 500'/>
+    </default>
+
+  </default>
+
+  <asset>
+    <!-- mmk2 color -->
+    <material name="Paint_Metallic_Cool_Grey__1" specular="0.5" shininess="0.5" rgba="0.928523183 0.928523183 0.928523123 1.0"/>
+    <material name="Paint_Matte_Black__1" specular="0.5" shininess="0.5" rgba="0.00111266039 0.00111266039 0.00111266039 1.0"/>
+    <material name="Clear_Shiny_Plastic_Black__1" specular="0.5" shininess="0.5" rgba="0 0 0 1.0"/>
+    <material name="Copper_Textured__1_1" specular="0.5" shininess="0.5" rgba="0.954579771 0.637773752 0.539052486 1.0"/>
+
+    <!-- chassis -->
+    <mesh name="lft_wheel_link" file="mmk2/lft_wheel_link.obj"/>
+    <mesh name="rgt_wheel_link" file="mmk2/rgt_wheel_link.obj"/>
+    <mesh name="rgt_behind_wheel_link" file="mmk2/rgt_behind_wheel_link.obj"/>
+    <mesh name="lft_behind_wheel_link" file="mmk2/lft_behind_wheel_link.obj"/>
+    <mesh name="rgt_front_wheel_link" file="mmk2/rgt_front_wheel_link.obj"/>
+    <mesh name="lft_front_wheel_link" file="mmk2/lft_front_wheel_link.obj"/>
+
+    <!-- neck -->
+    <mesh name="head_pitch_link" file="mmk2/head_pitch_link.obj"/>
+    <mesh file="mmk2/mmk2_neck.obj"/>
+
+    <!-- agv -->
+    <mesh file="mmk2/mmk2_agv_0.obj"/>
+    <mesh file="mmk2/mmk2_agv_1.obj"/>
+    <mesh file="mmk2/mmk2_agv_2.obj"/>
+
+    <!-- assembly_board -->
+    <mesh file="mmk2/mmk2_assembly_board_0.obj"/>
+    <mesh file="mmk2/mmk2_assembly_board_1.obj"/>
+
+    <!-- lift -->
+    <texture type="2d" name="lift_light_color" file="mmk2/lift_light_color.png"/>
+    <material name="material_lift_light_color" texture="lift_light_color" specular="1.0" shininess="0.0"/>
+    <mesh file="mmk2/mmk2_lift_link_0.obj"/>
+    <mesh file="mmk2/mmk2_lift_link_1.obj"/>
+    <mesh file="mmk2/mmk2_lift_link_2.obj"/>
+
+    <!-- head -->
+    <texture type="2d" name="Layer_04_204592_color" file="mmk2/head.png"/>
+    <material name="________________Emissive_White__1" texture="Layer_04_204592_color" specular="0.5" shininess="0.5"/>
+    <mesh file="mmk2/mmk2_head_0.obj"/>
+    <mesh file="mmk2/mmk2_head_1.obj"/>
+    <mesh file="mmk2/mmk2_head_2.obj"/>
+  </asset>
+
+  <contact>
+    <exclude body1='lft_wheel_link' body2='agv_link'/>
+    <exclude body1='rgt_wheel_link' body2='agv_link'/>
+    <exclude body1='skin_link' body2='rail_link'/>
+    <exclude body1='rail_link' body2='slide_link'/>
+    <exclude body1='slide_link' body2='skin_link'/>
+    <exclude body1='skin_link' body2='head_pitch_link'/>
+  </contact>
+
+  <tendon>
+    <fixed name='forward'>
+      <joint joint='lft_wheel_joint' coef='1.'/>
+      <joint joint='rgt_wheel_joint' coef='1.'/>
+    </fixed>
+    <fixed name='turn'>
+      <joint joint='lft_wheel_joint' coef='1.'/>
+      <joint joint='rgt_wheel_joint' coef='-1.'/>
+    </fixed>
+  </tendon>
+
+  <equality>
+    <joint joint1='lft_finger_left_joint' joint2='lft_finger_right_joint' polycoef='0 -1 0 0 0 '/>
+    <joint joint1='rgt_finger_left_joint' joint2='rgt_finger_right_joint' polycoef='0 -1 0 0 0'/>
+  </equality>
+
+</mujocoinclude>

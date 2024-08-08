@@ -1,0 +1,50 @@
+<mujoco model="airbot_play_il">
+
+  <include file="scene.xml"/>
+  <include file="qz11_scene.xml"/>
+  <include file="airbot_play/airbot_play_options.xml"/>
+  <include file="airbot_play/airbot_play_dependencies.xml"/>
+  <include file="object/cup_dependencies.xml"/>
+  <include file="object/usb_camera_dependencies.xml"/>
+
+  <worldbody>
+    <!-- <camera pos="0.137 0.115 3.454" xyaxes="0.004 -1.000 -0.000 1.000 0.004 0.017"/>
+    <camera pos="-3.697 0.136 0.728" xyaxes="-0.016 -1.000 0.000 -0.162 0.003 0.987"/> -->
+
+    <!-- ======= AITBOT PLAY ======= -->
+    <include file="airbot_play/airbot_play-split.xml"/>
+
+    <!-- ======= EYE SIDE ======= -->
+    <include file="object/camera_mount.xml"/>
+
+    <!-- ======= CUP ======= -->
+    <include file="object/cup_blue.xml"/>
+    <include file="object/cup_pink.xml"/>
+
+    <!-- ======= RED CABINET ======= -->
+    <body name="cabinet" pos="0.83 -0.2 0.725">
+      <geom size="0.19 0.2 0.008" pos="0 0 0.008" type="box" rgba="0.5 0.2 0.2 1" friction="0.6 0.6 0.6" material="wood"/>
+      <geom size="0.19 0.2 0.008" pos="0 0 0.315" type="box" rgba="0.5 0.2 0.2 1" friction="0.6 0.6 0.6" material="wood"/>
+      <geom size="0.19 0.2 0.008" pos="0 0 0.63" type="box" rgba="0.5 0.2 0.2 1" friction="0.6 0.6 0.6" material="wood"/>
+      <geom size="0.008 0.2 0.319" pos="0.182 0 0.319" type="box" rgba="0.5 0.2 0.2 1" friction="0.6 0.6 0.6" material="wood"/>
+      <geom size="0.19 0.008 0.319" pos="0  0.192 0.319" type="box" rgba="0.5 0.2 0.2 1" friction="0.6 0.6 0.6" material="wood"/>
+      <geom size="0.19 0.008 0.319" pos="0 -0.192 0.319" type="box" rgba="0.5 0.2 0.2 1" friction="0.6 0.6 0.6" material="wood"/>
+      <body name="cabinet_door" pos="-0.2 0.19 0.319">
+        <inertial pos="0 -0.19 0" mass="0.5" diaginertia="0.02 0.02 0.02" />
+        <joint name="cabinet_hinge" pos="0 0 0" axis="0 0 1" range="-1.5707 0" limited="true" frictionloss="1"/>
+        <geom size="0.19 0.008 0.319" euler="0 0 1.5708" pos="0 -0.19 0" type="box" rgba="0.5 0.2 0.2 1" friction="0.6 0.6 0.6" material="wood"/>
+
+        <geom size="0.008 0.05" pos="-0.04 -0.35 -0.1" type="cylinder" rgba="0 0 0 1" friction="0.6 0.6 0.6"/>
+        <geom size="0.008 0.02" euler="0 1.5708 0" pos="-0.025 -0.35 -0.15" type="cylinder" rgba="0 0 0 1" friction="0.6 0.6 0.6"/>
+        <geom size="0.008 0.02" euler="0 1.5708 0" pos="-0.025 -0.35 -0.05" type="cylinder" rgba="0 0 0 1" friction="0.6 0.6 0.6"/>
+
+        <geom size="0.012 0.005" euler="0 1.5708 0" pos="-0.005 -0.35 -0.2" type="cylinder" rgba="0.5 0.5 0.5 1"/>
+        <geom size="0.009 0.005" euler="0 1.5708 0" pos="-0.007 -0.35 -0.2" type="cylinder" rgba="0.6 0.6 0.6 1"/>
+        <geom size="0.002 0.005" euler="1.5708 0 0" pos="-0.011 -0.35 -0.2" type="cylinder" rgba="0.2 0.2 0.2 1" friction="0.6 0.6 0.6"/>
+
+      </body>
+    </body>
+
+  </worldbody>
+
+</mujoco>

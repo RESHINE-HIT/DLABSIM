@@ -1,0 +1,3 @@
+Tue Aug  6 15:56:50 2024
+WARNING: mju_openResource: unknown file '/home/ghz/Work/ALOHA/DLABSIM/models/mjcf/../airbot_play/airbot_play_dependencies.xml'
+

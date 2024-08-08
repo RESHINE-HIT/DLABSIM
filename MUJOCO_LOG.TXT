@@ -1,0 +1,42 @@
+Tue Aug  6 15:55:48 2024
+WARNING: mju_openResource: unknown file '/home/ghz/Work/ALOHA/DLABSIM/models/mjcf/../airbot_play/airbot_play_dependencies.xml'
+
+Tue Aug  6 15:58:12 2024
+WARNING: mju_openResource: unknown file '/home/ghz/Work/ALOHA/DLABSIM/models/mjcf/../airbot_play/airbot_play_dependencies.xml'
+
+Tue Aug  6 16:18:12 2024
+WARNING: mju_openResource: unknown file '/home/ghz/Work/ALOHA/DLABSIM/models/mjcf/../airbot_play/airbot_play_dependencies.xml'
+
+Tue Aug  6 16:18:56 2024
+WARNING: mju_openResource: unknown file '/home/ghz/Work/ALOHA/DLABSIM/models/mjcf/../airbot_play/airbot_play_dependencies.xml'
+
+Wed Aug  7 14:34:05 2024
+WARNING: Nan, Inf or huge value in CTRL at ACTUATOR 0. The simulation is unstable. Time = 0.0000.
+
+Wed Aug  7 14:35:24 2024
+WARNING: Nan, Inf or huge value in CTRL at ACTUATOR 0. The simulation is unstable. Time = 0.0000.
+
+Wed Aug  7 14:36:18 2024
+WARNING: Nan, Inf or huge value in CTRL at ACTUATOR 0. The simulation is unstable. Time = 0.0000.
+
+Wed Aug  7 14:36:26 2024
+WARNING: Nan, Inf or huge value in CTRL at ACTUATOR 0. The simulation is unstable. Time = 0.0000.
+
+Wed Aug  7 14:36:54 2024
+WARNING: Nan, Inf or huge value in CTRL at ACTUATOR 0. The simulation is unstable. Time = 0.0000.
+
+Wed Aug  7 14:38:13 2024
+WARNING: Nan, Inf or huge value in CTRL at ACTUATOR 0. The simulation is unstable. Time = 0.0000.
+
+Wed Aug  7 14:39:02 2024
+WARNING: Nan, Inf or huge value in CTRL at ACTUATOR 0. The simulation is unstable. Time = 0.0000.
+
+Wed Aug  7 14:39:58 2024
+WARNING: Nan, Inf or huge value in CTRL at ACTUATOR 0. The simulation is unstable. Time = 0.0000.
+
+Wed Aug  7 14:40:49 2024
+WARNING: Nan, Inf or huge value in CTRL at ACTUATOR 0. The simulation is unstable. Time = 0.0000.
+
+Wed Aug  7 14:41:35 2024
+WARNING: Nan, Inf or huge value in CTRL at ACTUATOR 0. The simulation is unstable. Time = 0.0000.
+

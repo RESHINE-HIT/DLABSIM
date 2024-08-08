@@ -1,0 +1,83 @@
+<mujoco model="airbot_play_il">
+
+  <include file="scene.xml"/>
+  <include file="airbot_play/airbot_play_options.xml"/>
+  <include file="airbot_play/airbot_play_dependencies.xml"/>
+
+  <default>
+    <default class="obj_visual">
+      <geom group="2" type="mesh" contype="0" conaffinity="0"/>
+    </default>
+    <default class="obj_collision">
+      <geom group="3" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" type="mesh"/>
+    </default>
+  </default>
+
+  <asset>
+    <texture type="2d" name="baked_mesh_tex0" file="obj/can_raw/baked_mesh_tex0.png"/>
+    <material name="can_texture" texture="baked_mesh_tex0" specular="0.5" shininess="0.5"/>
+    <mesh file="obj/can_raw/can_raw.obj"/>
+
+    <texture type="2d" name="cola_texture" file="obj/cola/cola_texture.png"/>
+    <material name="cola_texture" texture="cola_texture" specular="0.5" shininess="0.5"/>
+    <mesh file="obj/cola/cola.obj"/>
+
+    <texture type="2d" name="baishi_cola_texture" file="obj/baishi_cola/baishi_cola_texture.png"/>
+    <material name="baishi_cola_texture" texture="baishi_cola_texture" specular="0.5" shininess="0.5"/>
+    <mesh file="obj/baishi_cola/baishi_cola.obj"/>
+
+  </asset>
+
+  <worldbody>
+    <body name="table-a" pos="0.4 0 0">
+      <geom size="0.6 1.2 0.01" pos="0.6 0 1.315" euler="0 1.5708 0" type="box" rgba="0.8 0.8 0.8 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001"/>
+      <geom size="0.6 0.6 0.01" pos="0 1.2 1.315" euler="1.5708 0 0" type="box" rgba="0.8 0.8 0.8 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001"/>
+
+      <geom size="0.6 1.2 0.01" pos="0 0 0.715" type="box" rgba="0.8 0.8 0.8 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001"/>
+      <geom size="0.02 0.02 0.3575" pos=" 0.56  1.16 0.3575" type="box" contype="0" conaffinity="0" rgba="0.8 0.8 0.8 1" />
+      <geom size="0.02 0.02 0.3575" pos="-0.56  1.16 0.3575" type="box" contype="0" conaffinity="0" rgba="0.8 0.8 0.8 1" />
+      <geom size="0.02 0.02 0.3575" pos=" 0.56 -1.16 0.3575" type="box" contype="0" conaffinity="0" rgba="0.8 0.8 0.8 1" />
+      <geom size="0.02 0.02 0.3575" pos="-0.56 -1.16 0.3575" type="box" contype="0" conaffinity="0" rgba="0.8 0.8 0.8 1" />
+      <geom size="0.02 0.02 0.3575" pos=" 0.56  0.00 0.3575" type="box" contype="0" conaffinity="0" rgba="0.8 0.8 0.8 1" />
+      <geom size="0.02 0.02 0.3575" pos="-0.56  0.00 0.3575" type="box" contype="0" conaffinity="0" rgba="0.8 0.8 0.8 1" />
+    </body>
+
+    <!-- ======= AITBOT PLAY ======= -->
+    <body name="arm_pose" pos="0 0 0.725" euler="0 0 0">
+      <include file="airbot_play/airbot_play.xml"/>
+    </body>
+
+    <body name="can_raw" pos="0.6 0 0.95">
+      <joint type="free" frictionloss="0.00005" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom material="can_texture" mesh="can_raw" euler="1.5708 0 0" pos="0.005 0.0225 -0.055" class="obj_visual"/>
+      <geom mesh="can_raw" euler="1.5708 0 0" pos="0.005 0.0225 -0.055" class="obj_collision"/>
+    </body>
+
+    <body name="cola" pos="0.6 0.1 0.95" euler="0 0 3.1416">
+      <joint type="free" frictionloss="0.00005" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom material="cola_texture" mesh="cola" euler="1.5708 0 0" pos="-0.012 0.002 -0.06" class="obj_visual"/>
+      <geom mesh="cola" euler="1.5708 0 0" pos="-0.012 0.002 -0.06" class="obj_collision"/>
+      <geom size="0.03 0.03 0.01" pos="0 0 -0.05" type="box" group="3" rgba="0 0 0 1" />
+    </body>
+
+    <body name="baishi_cola" pos="0.6 -0.1 0.95" euler="0 0 3.1416">
+      <joint type="free" frictionloss="0.00005" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom material="baishi_cola_texture" mesh="baishi_cola" euler="1.5708 0 0" pos="0 0.005 -0.095" class="obj_visual"/>
+      <geom mesh="baishi_cola" euler="1.5708 0 0" pos="0 0.005 -0.095" class="obj_collision"/>
+      <geom size="0.03 0.03 0.01" pos="0 0 -0.085" type="box" group="3" rgba="0 0 0 1" />
+    </body>
+
+  </worldbody>
+
+  <equality>
+    <joint joint1='endleft' joint2='endright' polycoef='0 -1 0 0 0 '/>
+  </equality>
+
+  <actuator>
+    <include file="airbot_play/airbot_play_control.xml"/>
+  </actuator>
+
+</mujoco>

@@ -1,0 +1,50 @@
+<mujocoinclude>
+  <!-- ======= AITBOT PLAY ======= -->
+  <body name="arm_base" pos="0.200 -0.250 0.721" quat="0.707 0.000 0.000 0.707">
+    <geom type="box" pos="-0.02 0 0.005" size="0.0806 0.1375 0.0025" rgba="0.2 0.2 0.2 1"/>
+    <geom type="mesh" rgba="0.1 0.1 0.1 1" mesh="arm_base"/>
+  </body>
+
+  <body name="link1" pos="0.200 -0.250 0.838" quat="0.707 0.000 0.000 0.707">
+    <inertial pos="7.9126e-05 -0.002527 -0.0041359" quat="0.696716 0.716558 0.0238919 -0.0236876" mass="0.54639" diaginertia="0.000346294 0.000325437 0.000286269"/>
+    <geom type="mesh" contype="0" conaffinity="0" density="0" rgba="0.1 0.1 0.1 1" mesh="link1"/>
+  </body>
+
+  <body name="link2" pos="0.200 -0.250 0.838" quat="-0.395 0.587 -0.395 0.587">
+    <inertial pos="0.22493 0.0047721 0.008023" quat="-0.210875 0.632473 -0.273056 0.693506" mass="0.64621" diaginertia="0.00516535 0.00505042 0.000418626"/>
+    <geom type="mesh" rgba="0.1 0.1 0.1 1" mesh="link2"/>
+  </body>
+
+  <body name="link3" pos="0.200 -0.500 0.940" quat="0.500 0.500 0.500 0.500">
+    <inertial pos="0.16813 -5.5576e-05 0.0031184" quat="0.511278 0.488423 0.489191 0.510617" mass="0.26829" diaginertia="0.0031527 0.0030951 0.000239403"/>
+    <geom type="mesh" rgba="0.1 0.1 0.1 1" mesh="link3"/>
+  </body>
+
+  <body name="link4" pos="0.200 -0.192 0.940" quat="-0.707 0.707 0.000 0.000">
+    <inertial pos="5.2436e-06 0.00040412 -0.03228" quat="0.999969 -0.000174762 -0.00792041 -6.98144e-05" mass="0.34876" diaginertia="0.000423574 0.000412 0.000126826"/>
+    <geom type="mesh" rgba="0.1 0.1 0.1 1" mesh="link4"/>
+  </body>
+
+  <body name="link5" pos="0.200 -0.192 0.940" quat="-1.000 -0.000 0.000 -0.000">
+    <inertial pos="8.3328e-06 0.026148 0.002525" quat="0.531568 0.4663 0.4663 0.531568" mass="0.36132" diaginertia="0.0004677 0.000432922 0.000178178"/>
+    <geom type="mesh" rgba="0.1 0.1 0.1 1" mesh="link5"/>
+  </body>
+
+  <body name="link6" pos="0.200 0.045 0.940" quat="-0.500 0.500 -0.500 -0.500">
+    <camera name="eye" pos="-0.082 0 -0.12" euler="3.1416 0 1.5708" fovy="75" />
+    <inertial pos="-0.0047053 7.3857e-05 -0.12293" mass="0.53855" diaginertia="5e-05 5e-05 3.85e-05"/>
+    <geom type="mesh" rgba="0.1 0.1 0.1 1" mesh="link6"/>
+  </body>
+
+  <body name="right" pos="0.204 0.045 0.940" quat="0.000 -0.707 -0.707 -0.000">
+    <inertial pos="-0.048742 0.0096369 0.00044322" quat="0.757393 0.0415116 0.0313705 0.650883" mass="0.0626" diaginertia="2.79281e-05 1.90181e-05 1.21737e-05"/>
+    <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" type="mesh" mesh="right" rgba="0.1 0.1 0.1 1"/>
+  </body>
+
+  <body name="left" pos="0.195 0.045 0.940" quat="0.000 -0.707 -0.707 -0.000">
+    <inertial pos="-0.049039 -0.0096764 0.00038868" quat="0.650491 0.0296695 0.0398251 0.757889" mass="0.061803" diaginertia="2.74809e-05 1.88104e-05 1.19127e-05"/>
+    <joint name="endleft" pos="0 0 0" axis="0 1 0" type="slide" limited="true" range="-0.04 0" frictionloss="30"/>
+    <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" type="mesh" mesh="left" rgba="0.1 0.1 0.1 1"/>
+  </body>
+
+</mujocoinclude>

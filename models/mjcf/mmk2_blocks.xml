@@ -1,0 +1,207 @@
+<mujoco model="mmk2">
+
+  <include file="mmk2/mmk2_options.xml"/>
+  <include file="mmk2/mmk2_dependencies.xml"/>
+
+  <visual>
+    <global offwidth="1920" offheight="1080"/>
+    <quality shadowsize="4096" offsamples="4"/>
+    <headlight diffuse='0.6 0.6 0.6' ambient='.3 .3 .3' specular='0 0 0'/>
+    <scale com="0.05" camera="0.06" framelength="0.5" framewidth="0.02" forcewidth="0.1" contactwidth="0.01" contactheight="0.05"/>
+  </visual>
+
+  <asset>
+    <texture type='2d' name='groundplane' builtin='checker' mark='edge' rgb1='0.2 0.3 0.4' rgb2='0.1 0.2 0.3' markrgb='0.8 0.8 0.8' width='300' height='300'/>
+    <material name='groundplane' texture='groundplane' texuniform='true' texrepeat='5 5' reflectance='0.2'/>
+  </asset>
+
+  <asset>
+    <texture name="wood" type="cube" file="wood.png" />
+    <material name="wood" texture="wood" rgba="1 1 1 1" />
+  </asset>
+
+
+  <worldbody>
+    <light castshadow="false" directional='true' diffuse='.3 .3 .3' specular='0.3 0.3 0.3' pos='-1 -1 1' dir='1 1 -1'/>
+    <light directional='true' diffuse='.3 .3 .3' specular='0.3 0.3 0.3' pos='0 0 1' dir='-1 1 -1'/>
+    <light castshadow="false" directional='true' diffuse='.3 .3 .3' specular='0.3 0.3 0.3' pos='0 1 1' dir='0 -1 -1'/>
+    <geom name='floor' type='plane' size='0 0 0.01' material='groundplane' pos='0 0 0'/>
+
+    <include file="mmk2/mmk2.xml"/>
+
+    <body name="table-a" pos="0.85 0 0">
+      <geom size="0.6 1.2 0.01" pos="0 0 0.3" type="box" material="wood" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001"/>
+      <geom size="0.02 0.02 0.15" pos=" 0.56  1.16 0.15" type="box" contype="0" conaffinity="0" rgba="0.15 0.15 0.15 1" />
+      <geom size="0.02 0.02 0.15" pos="-0.56  1.16 0.15" type="box" contype="0" conaffinity="0" rgba="0.15 0.15 0.15 1" />
+      <geom size="0.02 0.02 0.15" pos=" 0.56 -1.16 0.15" type="box" contype="0" conaffinity="0" rgba="0.15 0.15 0.15 1" />
+      <geom size="0.02 0.02 0.15" pos="-0.56 -1.16 0.15" type="box" contype="0" conaffinity="0" rgba="0.15 0.15 0.15 1" />
+      <geom size="0.02 0.02 0.15" pos=" 0.56  0.00 0.15" type="box" contype="0" conaffinity="0" rgba="0.15 0.15 0.15 1" />
+      <geom size="0.02 0.02 0.15" pos="-0.56  0.00 0.15" type="box" contype="0" conaffinity="0" rgba="0.15 0.15 0.15 1" />
+    </body>  
+
+
+    <!-- 从右往左数 第1列 -->
+    <body name="B0_0_1" pos="0.3 -0.225 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <body name="B1_0_1" pos="0.35 -0.225 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <body name="B2_0_1" pos="0.4 -0.225 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <body name="B3_0_1" pos="0.45 -0.225 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <!-- 从右往左数 第2列 -->
+    <body name="B0_1_1" pos="0.3 -0.15 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <body name="B1_1_1" pos="0.35 -0.15 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <body name="B2_1_1" pos="0.4 -0.15 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <body name="B3_1_1" pos="0.45 -0.15 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <!-- 从右往左数 第3列 -->
+    <body name="B0_2_1" pos="0.3 -0.075 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <body name="B1_2_1" pos="0.35 -0.075 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <body name="B2_2_1" pos="0.4 -0.075 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <body name="B3_2_1" pos="0.45 -0.075 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <!-- 从右往左数 第4列 -->
+    <body name="B0_3_1" pos="0.3 0 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <body name="B1_3_1" pos="0.35 0 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <body name="B2_3_1" pos="0.4 0 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <body name="B3_3_1" pos="0.45 0 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <!-- 从右往左数 第5列 -->
+    <body name="B0_4_1" pos="0.3 0.075 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <body name="B1_4_1" pos="0.35 0.075 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <body name="B2_4_1" pos="0.4 0.075 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <body name="B3_4_1" pos="0.45 0.075 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <!-- 从右往左数 第6列 -->
+    <body name="B0_5_1" pos="0.3 0.15 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <body name="B1_5_1" pos="0.35 0.15 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <body name="B2_5_1" pos="0.4 0.15 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <body name="B3_5_1" pos="0.45 0.15 0.3225">
+      <joint type="free" frictionloss="0.0001" />
+      <inertial pos="0 0 0" mass="0.001" diaginertia="0.00002 0.00002 0.00002" />
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.0125 0.0125 0.0125" type="box"/>
+    </body>
+
+    <!-- <composite type="particle" count="5 6 2" spacing="0.075" offset="0.5 0 .32">
+      <geom rgba="0.2 0.2 0.6 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" size="0.0125 0.0125 0.0125" type="box" density="0.0001"/>
+    </composite> -->
+
+  </worldbody>
+
+  <keyframe>
+    <key name="home" qpos='0.05 -0.0375 0.055 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 -0.225 0.3225 1 0 0 0 0.35 -0.225 0.3225 1 0 0 0 0.4 -0.225 0.3225 1 0 0 0 0.45 -0.225 0.3225 1 0 0 0 0.3 -0.15 0.3225 1 0 0 0 0.35 -0.15 0.3225 1 0 0 0 0.4 -0.15 0.3225 1 0 0 0 0.45 -0.15 0.3225 1 0 0 0 0.3 -0.075 0.3225 1 0 0 0 0.35 -0.075 0.3225 1 0 0 0 0.4 -0.075 0.3225 1 0 0 0 0.45 -0.075 0.3225 1 0 0 0 0.3 0 0.3225 1 0 0 0 0.35 0 0.3225 1 0 0 0 0.4 0 0.3225 1 0 0 0 0.45 0 0.3225 1 0 0 0 0.3 0.075 0.3225 1 0 0 0 0.35 0.075 0.3225 1 0 0 0 0.4 0.075 0.3225 1 0 0 0 0.45 0.075 0.3225 1 0 0 0 0.3 0.15 0.3225 1 0 0 0 0.35 0.15 0.3225 1 0 0 0 0.4 0.15 0.3225 1 0 0 0 0.45 0.15 0.3225 1 0 0 0'/>
+  </keyframe>
+
+  <actuator>
+    <include file="mmk2/mmk2_control.xml"/>
+  </actuator>
+
+</mujoco>

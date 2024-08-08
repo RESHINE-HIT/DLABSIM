@@ -1,0 +1,36 @@
+<mujocoinclude>
+  <asset>
+    <mesh file="stl/tabletop.stl" name="tabletop" scale="0.001 0.001 0.001"/>
+    <texture name="wood" type="cube" file="wood.png" />
+    <material name="wood" texture="wood" rgba="1 1 1 1" />
+  </asset>
+
+  <worldbody>
+    <!-- ======= TABLE write ======= -->
+    <body name="table-a" pos="0 0 0">
+      <geom size="0.6 1.2 0.01" pos="0 0 0.715" type="box" rgba="0.8 0.8 0.8 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001"/>
+      <geom size="0.02 0.02 0.3575" pos=" 0.56  1.16 0.3575" type="box" contype="0" conaffinity="0" rgba="0.8 0.8 0.8 1" />
+      <geom size="0.02 0.02 0.3575" pos="-0.56  1.16 0.3575" type="box" contype="0" conaffinity="0" rgba="0.8 0.8 0.8 1" />
+      <geom size="0.02 0.02 0.3575" pos=" 0.56 -1.16 0.3575" type="box" contype="0" conaffinity="0" rgba="0.8 0.8 0.8 1" />
+      <geom size="0.02 0.02 0.3575" pos="-0.56 -1.16 0.3575" type="box" contype="0" conaffinity="0" rgba="0.8 0.8 0.8 1" />
+      <geom size="0.02 0.02 0.3575" pos=" 0.56  0.00 0.3575" type="box" contype="0" conaffinity="0" rgba="0.8 0.8 0.8 1" />
+      <geom size="0.02 0.02 0.3575" pos="-0.56  0.00 0.3575" type="box" contype="0" conaffinity="0" rgba="0.8 0.8 0.8 1" />
+    </body>
+
+    <!-- ======= TABLE red ======= -->
+    <body name="table-b" pos="0.9 0.35 0">
+      <geom size="0.3 0.8 0.01" pos="0 0 0.715" type="box" rgba="0.5 0.2 0.2 1" material="wood" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001"/>
+      <geom size="0.02 0.02 0.3575" pos=" 0.275  0.775 0.3575" type="box" contype="0" conaffinity="0" rgba="0.15 0.15 0.15 1" />
+      <geom size="0.02 0.02 0.3575" pos="-0.275  0.775 0.3575" type="box" contype="0" conaffinity="0" rgba="0.15 0.15 0.15 1" />
+      <geom size="0.02 0.02 0.3575" pos=" 0.275 -0.775 0.3575" type="box" contype="0" conaffinity="0" rgba="0.15 0.15 0.15 1" />
+      <geom size="0.02 0.02 0.3575" pos="-0.275 -0.775 0.3575" type="box" contype="0" conaffinity="0" rgba="0.15 0.15 0.15 1" />
+    </body>
+
+    <!-- ======= WRITE CUBE ======= -->
+    <body name="write_cube" pos="0.77 0.8 0.855">
+      <geom size="0.15 0.15 0.15" type="box" rgba="0.9 0.9 0.9 1" condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001"/>
+    </body>
+
+  </worldbody>
+
+</mujocoinclude>

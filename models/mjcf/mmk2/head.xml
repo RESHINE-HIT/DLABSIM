@@ -1,0 +1,18 @@
+<mujocoinlcude>
+  <body name="head_yaw_link" pos="0 -0.15475 0.00458">
+    <inertial pos="-0.00312418 -0.000118833 -0.00687158" quat="0.945671 0.00553657 -0.32491 0.0104641" mass="0.083111" diaginertia="4.83755e-05 4.39275e-05 2.73932e-05"/>
+    <joint name="head_yaw_joint" class='head_yaw_joint'/>
+    <body name="head_pitch_link" pos="0.016073 0.00046009 0.038995" quat="0.492797 0.492799 0.5071 0.507099">
+      <inertial pos="-0.0352711 0.123044 -0.0165046" quat="0.714586 0.699243 0.0178013 0.0104566" mass="0.767298" diaginertia="0.00394021 0.00338829 0.00196438"/>
+      <joint name="head_pitch_joint" class='head_pitch_joint'/>
+      <geom name='head_pitch' type="mesh" material="Paint_Matte_Black__1" mesh="head_pitch_link"/>
+      <geom material="Paint_Matte_Black__1" mesh="mmk2_neck" class="visual"/>
+      <body name="head_cam" pos='-0.09 0.19 -0.023' euler="0 0 -0.15">
+        <camera name='head_cam' fovy='90' euler='0 1.5708 0'/>
+      </body>
+      <geom mesh="mmk2_head_0" material="________________Emissive_White__1" class="visual" group="1"/>
+      <geom mesh="mmk2_head_1" material="Paint_Matte_Black__1" class="visual" group="1"/>
+      <geom mesh="mmk2_head_2" material="Paint_Metallic_Cool_Grey__1" class="visual" group="1"/>
+    </body>
+  </body>
+</mujocoinlcude>
