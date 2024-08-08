@@ -258,10 +258,18 @@ class MujocoRos2Node(Node):
             self.button_callback,
             10
         )
+        self.subscription_encoder = self.create_subscription(
+            Float32,
+            'encoder_value',
+            self.encoder_callback,
+            10
+        )
 
         self.x_value = 0.0
         self.y_value = 0.0
         self.button_value = 0.0
+        self.encoder_value = 0.0
+
     def x_callback(self, msg):
         self.x_value = msg.data
         self.get_logger().info('X: "%s"' % msg.data)
@@ -275,6 +283,10 @@ class MujocoRos2Node(Node):
     def button_callback(self, msg):
         self.button_value = msg.data
         self.get_logger().info(f'Received button_data: {msg.data}')
+
+    def encoder_callback(self,msg):
+        self.encoder_value = msg.data
+        self.get_logger().info(f'Received encoder_value: {msg.data}')
 
     # def update_chassis_cmd(self):
     #     main.chassis_cmd[:] = [self.y_value, self.x_value]
@@ -298,11 +310,11 @@ def main(args=None):
     i = 0
     while exec_node.running:
 
-        #rclpy.spin_once(data_subscriber) #节点只运行一次！
+        rclpy.spin_once(data_subscriber) #节点只运行一次！
 
         chassis_cmd[:]=[data_subscriber.x_value,data_subscriber.y_value]
         lift_cmd[:] =data_subscriber.button_value
-        head_cmd[:]=[1,1]
+        head_cmd[:]=[data_subscriber.encoder_value,1]
         obs, pri_obs, rew, ter, info = exec_node.step(action)#step运行仿真环境，运行一次！
         i += 1
 
