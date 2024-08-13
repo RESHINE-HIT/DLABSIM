@@ -13,7 +13,7 @@ from dlabsim.airbot_play import AirbotPlayFIK
 from dlabsim import DLABSIM_ROOT_DIR, DLABSIM_ASSERT_DIR
 from dlabsim.envs.airbot_play_base import AirbotPlayBase, AirbotPlayCfg
 
-data_set_size = 200
+data_set_size = 2
 
 class SimNode(AirbotPlayBase):
     def resetState(self):
@@ -48,7 +48,7 @@ class SimNode(AirbotPlayBase):
         self.obs["jq"][6] *= 25.0 # gripper normalization
         return self.obs
 
-def recoder(save_path, obs_lst):
+def recoder(save_path, obs_lst, act_lst):
     os.mkdir(save_path)
     with open(os.path.join(save_path, "obs_action.json"), "w") as fp:
         obj = {
@@ -62,6 +62,7 @@ def recoder(save_path, obs_lst):
 
     mediapy.write_video(os.path.join(save_path, "video.mp4"), [o['img'] for o in obs_lst], fps=cfg.render_set["fps"])
 
+
 if __name__ == "__main__":
 
     np.set_printoptions(precision=3, suppress=True, linewidth=500)
@@ -71,7 +72,7 @@ if __name__ == "__main__":
     cfg.rb_link_list = []
     cfg.obj_list     = ["cup_blue", "cup_pink"]
     cfg.sync         = False
-    cfg.headless     = True
+    cfg.headless     = False
     cfg.decimation   = 4
     cfg.render_set   = {
         "fps"    : 50,
@@ -250,7 +251,7 @@ if __name__ == "__main__":
 
         if state_idx > 10:
             save_path = os.path.join(save_dir, "{:03d}".format(data_idx))
-            process = mp.Process(target=recoder, args=(save_path, obs_lst))
+            process = mp.Process(target=recoder, args=(save_path, obs_lst, act_lst))
             process.start()
             process_list.append(process)
 
