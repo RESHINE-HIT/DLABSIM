@@ -13,7 +13,7 @@ from dlabsim.airbot_play import AirbotPlayFIK
 from dlabsim import DLABSIM_ROOT_DIR, DLABSIM_ASSERT_DIR
 from dlabsim.envs.airbot_play_base import AirbotPlayBase, AirbotPlayCfg
 
-data_set_size = 2
+data_set_size = 200
 
 class SimNode(AirbotPlayBase):
     def resetState(self):
