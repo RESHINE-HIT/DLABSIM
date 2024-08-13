@@ -13,95 +13,11 @@ from std_msgs.msg import Int32
 
 import rclpy
 from rclpy.node import Node
-''''''
-class EncoderDriver(object):
-    def __init__(self, motor_id, can_interface):
-        self.inited = False
-        self.board_id = motor_id
-        self.can_interface = can_interface
-        self.bus = can.interface.Bus(channel=can_interface, bustype="socketcan")
-        self.ret_cmd_id = 0x588
-        self.motor_pos = 0.0
-        self.ret_id = 0
-        self.notifier = can.Notifier(self.bus, [self._can_callback], timeout=1.0)
-        self.inited = True
-        self.x_value=None
-        self.y_value=None
-
-    # def __del__(self):
-    #     if self.inited:
-    #         self.notifier.stop()
-
-    # def pos_cmd(self, pos, spd, ignore_limit):
-    #     tx_frame = can.Message(
-    #         arbitration_id=self.board_id, data=[0x07], is_extended_id=False
-    #     )
-    #     self._can_send(tx_frame)
-
-    # def mit_cmd(self, f_p, f_v, f_kp, f_kd, f_t):
-    #     tx_frame = can.Message(
-    #         arbitration_id=self.board_id, dlc=0x01, data=[0x07], is_extended_id=False
-    #     )
-    #     self._can_send(tx_frame)
-
-    # def set_zero(self):
-    #     can_id = self.board_id | 0x80
-    #     tx_frame1 = can.Message(
-    #         arbitration_id=can_id, dlc=0x01, data=[0x0B], is_extended_id=False
-    #     )
-    #     self._can_send(tx_frame1)
-    #     tx_frame2 = can.Message(
-    #         arbitration_id=can_id, dlc=0x01, data=[0x0C], is_extended_id=False
-    #     )
-    #     self._can_send(tx_frame2)
-    #     return True
-
-    # def get_sSFtate(self):
-    #     return self.motor_pos
-
-    # def _can_send(self, tx_frame):
-    #     self.bus.send(tx_frame)
-
-    def _can_callback(self, msg: can.Message):
-        if msg.arbitration_id == 0x522:  # is this motor
-            data=msg.data[0]
-            #print("Buttom value :",data)
-
-
-        if msg.arbitration_id == 0x588:  # is this motor
-            data=msg.data[0]
-            
-            if data & 0x80:  # 检查最高位是否为1
-                    self.x_value = data & 0x7F  # 移除标志位
-                    self.x_value = self.map_value(self.x_value, 93, True)
-                    #print("X Value :", self.x_value)
-           
-    
-            else :  # 最高位为0
-                    self.y_value = data & 0x7F  # 移除标志位
-                    self.y_value = self.map_value(self.y_value, 93, True)
-                    #print("Y Value :", self.y_value)
-
-            #mess=self.bus.recv()
-            #print(mess)
-        #print(msg.data[0])  
-    def map_value(self, value, center, is_x):
-        if value < center:
-            mapped_value = (value - center) / center
-        else:
-            mapped_value = (value - center) / (127 - center)
-
-        # 限幅算法：在输出绝对值小于0.1时输出为0
-        if abs(mapped_value) < 0.2:
-            mapped_value = 0.0
-
-        return mapped_value              
-''''''
 
 class MMK2Cfg(BaseConfig):
     expreriment    = "qiuzhi_11F_il"
     robot          = "mmk2"
-    mjcf_file_path = "mjcf/mmk2_floor.xml"
+    mjcf_file_path = "mjcf/mmk2_blocks_teleop.xml"
     timestep       = 0.0025
     decimation     = 4
     sync           = True
@@ -119,8 +35,38 @@ class MMK2Cfg(BaseConfig):
     obs_camera_id  = 1
     rb_link_list   = []
     obj_list       = []
+    init_joint_pose = {
+        "base_position_x": 0.0,
+        "base_position_y": 0.0,
+        "base_position_z": 0.0,
+        "base_orientation_w": 1.0,
+        "base_orientation_x": 0.0,
+        "base_orientation_y": 0.0,
+        "base_orientation_z": 0.0,
+        "lft_wheel": 0.0,  
+        "rgt_wheel": 0.0,  
+        "slide": 0.0,  
+        "head_yaw": 0.0,  
+        "head_pitch": 0.0,  
+        "left_arm_joint1"  :  0.0,
+        "left_arm_joint2"  :  0.0,
+        "left_arm_joint3"  :  0.0,
+        "left_arm_joint4"  :  0.0,
+        "left_arm_joint5"  :  0.0,
+        "left_arm_joint6"  :  0.0,
+        "left_arm_gripper_0" :  0.0,
+        "left_arm_gripper_1" :  0.0,
+        "right_arm_joint1"  :  0.06382703,
+        "right_arm_joint2"  : -0.71966516,
+        "right_arm_joint3"  :  1.2772779,
+        "right_arm_joint4"  : -1.5965166,
+        "right_arm_joint5"  :  1.72517278,
+        "right_arm_joint6"  :  1.80462028,
+        "right_arm_gripper_0" :  1,
+        "right_arm_gripper_1" :  1
+    }
     """
-    njqpos=29
+    njqpos=28
     [0:7]-base; 7-lft_wheel; 8-rgt_wheel; 9-slide; 10-head_yaw"; 11-head_pitch; [12:20]-lft_arm ; [20:28]-rgt_arm
 
     njctrl=19
@@ -134,13 +80,14 @@ class MMK2Base(SimulatorBase):
         self.njctrl = 19
 
         super().__init__(config)
-        self.init_joint_pose = self.mj_model.key('home').qpos[:self.njq]
+        # TODO：初始位置配置
+        # self.init_joint_pose = self.mj_model.key('home').qpos[:self.njq]
+        self.init_joint_pose = np.array(list(config.init_joint_pose.values()))
         print(self.init_joint_pose)
         self.jq = np.zeros(self.njq)
         self.jv = np.zeros(self.njv)
 
         ip_cp = self.init_joint_pose.copy()
-        # self.init_ctrl = np.zeros(19)
         self.init_ctrl = np.array(
             [0.0, 0.0] + 
             ip_cp[[9,10,11]].tolist() + 
@@ -159,6 +106,7 @@ class MMK2Base(SimulatorBase):
         self.jv = np.zeros(self.njv)
 
         self.mj_data.qpos[:self.njq] = self.init_joint_pose[:self.njq].copy()
+        # self.mj_data.qvel[:self.njv] = self.init_joint_pose[self.njq:self.njq+self.njq].copy()
         self.mj_data.ctrl[:self.njctrl] = self.init_ctrl.copy()
         mujoco.mj_forward(self.mj_model, self.mj_data)
 
@@ -310,7 +258,7 @@ def main(args=None):
     i = 0
     while exec_node.running:
 
-        rclpy.spin_once(data_subscriber) #节点只运行一次！
+        #rclpy.spin_once(data_subscriber) #节点只运行一次！
 
         chassis_cmd[:]=[data_subscriber.x_value,data_subscriber.y_value]
         lift_cmd[:] =data_subscriber.button_value
